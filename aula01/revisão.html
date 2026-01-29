@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios PFE - Agenda Inteligente</title>
+    
+    
+</head>
+<body>
+    <div class="container">
+        <h1> Exercícios PFE - Agenda Inteligente</h1>
+
+        <div class="alert-box">
+            <strong> Dica:</strong> Abra o Console do Navegador (F12) para ver os testes executados automaticamente do arquivo JavaScript externo!
+        </div>
+
+        <!-- EXERCÍCIO 1 -->
+        <div class="exercicio">
+            <h2>Exercício 1: Verificador de Turno e Prioridade</h2>
+            <p><strong>Objetivo:</strong> Verificar tarefas usando operadores lógicos e estruturas de decisão.</p>
+            
+            <div class="grid-inputs">
+                <div class="input-group">
+                    <label for="hora1">Hora da Tarefa (0-23):</label>
+                    <input type="number" id="hora1" min="0" max="23" placeholder="Digite a hora">
+                </div>
+                <div class="input-group">
+                    <label for="prioridade1">Prioridade (1-10):</label>
+                    <input type="number" id="prioridade1" min="1" max="10" placeholder="Digite a prioridade">
+                </div>
+            </div>
+            
+            <button onclick="verificarTarefaUI()">Verificar Tarefa</button>
+            
+            <div id="resultado1" class="resultado"></div>
+        </div>
+
+        <!-- EXERCÍCIO 2 -->
+        <div class="exercicio">
+            <h2>Exercício 2: Calculadora de Gastos Mensais</h2>
+            <p><strong>Objetivo:</strong> Calcular saldo usando operadores aritméticos e estruturas de decisão.</p>
+            
+            <div class="grid-inputs">
+                <div class="input-group">
+                    <label for="salario">Salário (R$):</label>
+                    <input type="number" id="salario" step="0.01" placeholder="Ex: 3000.00">
+                </div>
+                <div class="input-group">
+                    <label for="aluguel">Aluguel (R$):</label>
+                    <input type="number" id="aluguel" step="0.01" placeholder="Ex: 800.00">
+                </div>
+                <div class="input-group">
+                    <label for="alimentacao">Alimentação (R$):</label>
+                    <input type="number" id="alimentacao" step="0.01" placeholder="Ex: 600.00">
+                </div>
+                <div class="input-group">
+                    <label for="lazer">Lazer (R$):</label>
+                    <input type="number" id="lazer" step="0.01" placeholder="Ex: 400.00">
+                </div>
+            </div>
+            
+            <button onclick="calcularGastosUI()">Calcular Saldo</button>
+            
+            <div id="resultado2" class="resultado"></div>
+        </div>
+
+        <!-- EXERCÍCIO 3 -->
+        <div class="exercicio">
+            <h2>Exercício 3: Formatador de Nomes para a Agenda</h2>
+            <p><strong>Objetivo:</strong> Criar função para limpar e formatar nomes de contatos.</p>
+            
+            <div class="input-group">
+                <label for="nome3">Nome do Contato:</label>
+                <input type="text" id="nome3" placeholder="Ex:   joão silva   ">
+            </div>
+            
+            <button onclick="formatarNomeUI()">Formatar Nome</button>
+            
+            <div id="resultado3" class="resultado"></div>
+        </div>
+
+        <!-- EXERCÍCIO 4 -->
+        <div class="exercicio">
+            <h2>Exercício 4: Contador de Dias para o Evento</h2>
+            <p><strong>Objetivo:</strong> Calcular dias restantes para um evento.</p>
+            
+            <div class="input-group">
+                <label for="dataEvento">Data do Evento:</label>
+                <input type="date" id="dataEvento">
+            </div>
+            
+            <button onclick="calcularDiasUI()">Calcular Dias Restantes</button>
+            
+            <div id="resultado4" class="resultado"></div>
+        </div>
+
+        <!-- EXERCÍCIO 5 -->
+        <div class="exercicio">
+            <h2>Exercício 5: Varredura de Compromissos (Loops)</h2>
+            <p><strong>Objetivo:</strong> Usar estruturas de repetição para validar horários.</p>
+            
+            <p><strong>Array de horários:</strong> <code>[8, 12, 25, 15, -2, 20]</code></p>
+            
+            <h3>Escolha a estrutura de repetição:</h3>
+            <div class="input-group">
+                <select id="tipoLoop">
+                    <option value="for">for (tradicional)</option>
+                    <option value="forof">for...of</option>
+                    <option value="foreach">forEach</option>
+                </select>
+            </div>
+            
+            <button onclick="varrerCompromissosUI()">Varrer Compromissos</button>
+            
+            <div id="console5" class="console-output"></div>
+            <div id="resultado5" class="resultado"></div>
+        </div>
+
+    </div>
+
+    <!-- IMPORTANDO O ARQUIVO JAVASCRIPT EXTERNO -->
+    <script src="revisao.js"></script>
+
+    <!-- FUNÇÕES DE INTERFACE (UI) -->
+    <script>
+        // ==================== FUNÇÕES DE INTERFACE PARA O HTML ====================
+        
+        // Exercício 1 - UI
+        function verificarTarefaUI() {
+            const hora = parseInt(document.getElementById('hora1').value);
+            const prioridade = parseInt(document.getElementById('prioridade1').value);
+            const resultado = document.getElementById('resultado1');
+            
+            // Usa a função do arquivo externo
+            const mensagem = verificarTarefa(hora, prioridade);
+            
+            // Determina a classe CSS baseada na mensagem
+            let classe = 'info';
+            if (mensagem.includes('CRÍTICA')) classe = 'critico';
+            else if (mensagem.includes('IMPORTANTE')) classe = 'importante';
+            else if (mensagem.includes('NÃO IMPORTANTE')) classe = 'nao-importante';
+            else if (mensagem.includes('Inválido') || mensagem.includes('Inválida')) classe = 'invalido';
+            
+            resultado.innerHTML = mensagem;
+            resultado.className = `resultado show ${classe}`;
+        }
+
+        // Exercício 2 - UI
+        function calcularGastosUI() {
+            const salario = parseFloat(document.getElementById('salario').value);
+            const aluguel = parseFloat(document.getElementById('aluguel').value);
+            const alimentacao = parseFloat(document.getElementById('alimentacao').value);
+            const lazer = parseFloat(document.getElementById('lazer').value);
+            const resultado = document.getElementById('resultado2');
+            
+            if (isNaN(salario) || isNaN(aluguel) || isNaN(alimentacao) || isNaN(lazer)) {
+                resultado.textContent = ' Por favor, preencha todos os campos com valores válidos!';
+                resultado.className = 'resultado show invalido';
+                return;
+            }
+            
+            // Usa a função do arquivo externo
+            const dados = calcularGastos(salario, aluguel, alimentacao, lazer);
+            
+            let mensagem = ` Salário: R$ ${dados.salario.toFixed(2)}<br>`;
+            mensagem += ` Total de Despesas: R$ ${dados.totalDespesas.toFixed(2)}<br>`;
+            mensagem += `<br><strong>Saldo Restante: R$ ${dados.saldo.toFixed(2)}</strong><br><br>`;
+            mensagem += `{dados.emoji} ${dados.status}`;
+            
+            let classe = 'info';
+            if (dados.status === 'Saldo Positivo') classe = 'positivo';
+            else if (dados.status === 'No Limite') classe = 'limite';
+            else if (dados.status === 'Saldo Negativo') classe = 'negativo';
+            
+            resultado.innerHTML = mensagem;
+            resultado.className = `resultado show ${classe}`;
+        }
+
+        // Exercício 3 - UI
+        function formatarNomeUI() {
+            const nomeInput = document.getElementById('nome3').value;
+            const resultado = document.getElementById('resultado3');
+            
+            if (nomeInput.trim() === '') {
+                resultado.textContent = ' Por favor, digite um nome!';
+                resultado.className = 'resultado show invalido';
+                return;
+            }
+            
+            // Usa a função do arquivo externo
+            const dados = limparNomeContato(nomeInput);
+            
+            let mensagem = ` Nome Original: "${dados.original}"<br>`;
+            mensagem += ` Nome Formatado: <strong>${dados.formatado}</strong><br>`;
+            mensagem += ` Quantidade de Palavras: ${dados.palavras}`;
+            
+            resultado.innerHTML = mensagem;
+            resultado.className = 'resultado show info';
+        }
+
+        // Exercício 4 - UI
+        function calcularDiasUI() {
+            const dataEventoInput = document.getElementById('dataEvento').value;
+            const resultado = document.getElementById('resultado4');
+            
+            if (!dataEventoInput) {
+                resultado.textContent = ' Por favor, selecione uma data!';
+                resultado.className = 'resultado show invalido';
+                return;
+            }
+            
+            const dataEvento = new Date(dataEventoInput + 'T00:00:00');
+            
+            // Usa a função do arquivo externo
+            const info = calcularDiasParaEvento(dataEvento);
+            
+            let mensagem = ` Data de Hoje: ${info.dataHoje.toLocaleDateString('pt-BR')}<br>`;
+            mensagem += ` Data do Evento: ${info.dataEvento.toLocaleDateString('pt-BR')}<br><br>`;
+            
+            let classe = 'info';
+            if (info.eHoje) {
+                mensagem += ` <strong>O evento é HOJE!</strong>`;
+                classe = 'importante';
+            } else if (info.jaPassou) {
+                mensagem += ` <strong>O evento já passou há ${Math.abs(info.diasRestantes)} dia(s).</strong>`;
+                classe = 'nao-importante';
+            } else {
+                mensagem += ` <strong>Faltam ${info.diasRestantes} dia(s) para o seu compromisso!</strong>`;
+                classe = 'info';
+            }
+            
+            resultado.innerHTML = mensagem;
+            resultado.className = `resultado show ${classe}`;
+        }
+
+        // Exercício 5 - UI
+        function varrerCompromissosUI() {
+            const agendaHorarios = [8, 12, 25, 15, -2, 20];
+            const tipoLoop = document.getElementById('tipoLoop').value;
+            const consoleOutput = document.getElementById('console5');
+            const resultado = document.getElementById('resultado5');
+            
+            let contagemValidos = 0;
+            let output = ` Analisando compromissos usando estrutura "${tipoLoop}"...\n\n`;
+            
+            if (tipoLoop === 'for') {
+                output += '/* Usando FOR tradicional */\n';
+                for (let i = 0; i < agendaHorarios.length; i++) {
+                    const horario = agendaHorarios[i];
+                    if (horario >= 0 && horario <= 23) {
+                        output += ` [${i}] Compromisso agendado para as ${horario}h\n`;
+                        contagemValidos++;
+                    } else {
+                        output += ` [${i}] Atenção: O horário ${horario}h é inválido!\n`;
+                    }
+                }
+            } else if (tipoLoop === 'forof') {
+                output += '/* Usando FOR...OF */\n';
+                let indice = 0;
+                for (const horario of agendaHorarios) {
+                    if (horario >= 0 && horario <= 23) {
+                        output += ` [${indice}] Compromisso agendado para as ${horario}h\n`;
+                        contagemValidos++;
+                    } else {
+                        output += ` [${indice}] Atenção: O horário ${horario}h é inválido!\n`;
+                    }
+                    indice++;
+                }
+            } else if (tipoLoop === 'foreach') {
+                output += '/* Usando FOREACH */\n';
+                agendaHorarios.forEach((horario, indice) => {
+                    if (horario >= 0 && horario <= 23) {
+                        output += ` [${indice}] Compromisso agendado para as ${horario}h\n`;
+                        contagemValidos++;
+                    } else {
+                        output += ` [${indice}] Atenção: O horário ${horario}h é inválido!\n`;
+                    }
+                });
+            }
+            
+            output += `\n Total de compromissos válidos: ${contagemValidos} de ${agendaHorarios.length}`;
+            
+            consoleOutput.innerHTML = `<pre>${output}</pre>`;
+            consoleOutput.className = 'console-output show';
+            
+            resultado.innerHTML = `
+                <strong>Resumo da Varredura:</strong><br>
+                 Válidos: ${contagemValidos}<br>
+                 Inválidos: ${agendaHorarios.length - contagemValidos}<br>
+                 Taxa de Sucesso: ${((contagemValidos / agendaHorarios.length) * 100).toFixed(1)}%
+            `;
+            resultado.className = 'resultado show info';
+        }
+    </script>
+</body>
+</html>

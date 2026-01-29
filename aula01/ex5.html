@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Varredura de Compromissos</title>
+    
+</head>
+<body>
+    <div class="container">
+        <h1> Varredura de Compromissos</h1>
+        <p class="subtitle">Validação de Horários do Dia</p>
+
+        <div class="input-section">
+            <label for="horarios">Digite os horários separados por vírgula:</label>
+            <input 
+                type="text" 
+                id="horarios" 
+                placeholder="Ex: 8, 12, 25, 15, -2, 20"
+                value="8, 12, 25, 15, -2, 20"
+            >
+        </div>
+
+        <div class="button-group">
+            <button class="btn-validar" onclick="validarCompromissos()">
+                🔍 Validar Compromissos
+            </button>
+            <button class="btn-limpar" onclick="limparResultados()">
+                🗑️ Limpar
+            </button>
+        </div>
+
+        <div id="resultados" class="hidden">
+            <div class="resultado" id="lista-validacao"></div>
+            <div class="resumo" id="resumo"></div>
+        </div>
+
+        <div class="info-box">
+            <h4> Diferenças entre Estruturas de Repetição:</h4>
+            <p><strong>for:</strong> Estrutura tradicional com contador. Ideal quando você precisa do índice ou controle total sobre a iteração.</p>
+            <p><strong>for...of:</strong> Itera diretamente sobre os valores do array. Mais limpo e moderno quando você só precisa dos valores.</p>
+            <p><strong>forEach:</strong> Método de array que executa uma função para cada elemento. Bom para operações funcionais, mas não permite break/continue.</p>
+            <p><strong> Para este exercício:</strong> Usei <code>for...of</code> porque precisamos apenas iterar pelos valores dos horários, tornando o código mais legível e conciso.</p>
+        </div>
+    </div>
+
+ 
+    <script src="script.js"></script>
+</body>
+</html>
