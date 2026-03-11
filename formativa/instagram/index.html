@@ -9,7 +9,7 @@
 <body>
   <div class="container">
 
-    <!-- LEFT SIDEBAR -->
+    
     <aside class="sidebar">
       <div class="logo">Instagram</div>
       <nav>
@@ -46,10 +46,10 @@
       </div>
     </aside>
 
-    <!-- MAIN FEED -->
+   
     <main class="feed">
 
-      <!-- STORIES -->
+      
       <div class="stories">
         <div class="story your-story">
           <div class="story-avatar add-story">
@@ -83,7 +83,7 @@
         </div>
       </div>
 
-      <!-- POST 1 — CAROUSEL -->
+    
       <article class="post">
         <div class="post-header">
           <div class="avatar-ring">
@@ -98,7 +98,7 @@
           </button>
         </div>
 
-        <!-- CAROUSEL -->
+       
         <div class="carousel" data-index="0">
           <div class="carousel-track">
             <div class="carousel-slide">
@@ -147,7 +147,7 @@
         <button class="view-comments">Ver todos os 42 comentários</button>
         <p class="timestamp">HÁ 2 HORAS</p>
 
-        <!-- COMMENT INPUT -->
+        
         <div class="comment-bar">
           <img src="imagens/xd.jpg" alt="Você" class="comment-avatar">
           <input type="text" placeholder="Adicione um comentário..." class="comment-input">
@@ -155,7 +155,7 @@
         </div>
       </article>
 
-      <!-- POST 2 — SINGLE IMAGE -->
+      
       <article class="post">
         <div class="post-header">
           <div class="avatar-ring">
@@ -222,7 +222,7 @@
 
     </main>
 
-    <!-- RIGHT SIDEBAR -->
+   
     <aside class="sidebar-right">
       <div class="user-profile-section">
         <div class="avatar-ring large">
@@ -283,7 +283,7 @@
   </div>
 
   <script>
-    // ── CAROUSEL ──────────────────────────────────────────────
+   
     function moveCarousel(btn, dir) {
       const carousel = btn.closest('.carousel');
       const track = carousel.querySelector('.carousel-track');
@@ -302,20 +302,20 @@
       dots.forEach((d, i) => d.classList.toggle('active', i === index));
       if (counter) counter.textContent = `${index + 1} / ${total}`;
 
-      // Show/hide buttons
+     
       carousel.querySelector('.prev').style.opacity = index === 0 ? '0' : '1';
       carousel.querySelector('.prev').style.pointerEvents = index === 0 ? 'none' : 'auto';
       carousel.querySelector('.next').style.opacity = index === total - 1 ? '0' : '1';
       carousel.querySelector('.next').style.pointerEvents = index === total - 1 ? 'none' : 'auto';
     }
 
-    // Init all carousels
+   
     document.querySelectorAll('.carousel').forEach(c => {
       c.querySelector('.prev').style.opacity = '0';
       c.querySelector('.prev').style.pointerEvents = 'none';
     });
 
-    // Touch/swipe support
+    
     document.querySelectorAll('.carousel').forEach(carousel => {
       let startX = 0;
       carousel.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
@@ -327,7 +327,7 @@
       });
     });
 
-    // ── LIKE ──────────────────────────────────────────────────
+   
     function toggleLike(btn) {
       const liked = btn.classList.toggle('liked');
       const likesEl = btn.closest('.post').querySelector('.likes');
@@ -336,19 +336,19 @@
       if (liked) btn.animate([{ transform: 'scale(1.5)' }, { transform: 'scale(1)' }], { duration: 300 });
     }
 
-    // ── SAVE ──────────────────────────────────────────────────
+    
     function toggleSave(btn) {
       btn.classList.toggle('saved');
     }
 
-    // ── FOLLOW ────────────────────────────────────────────────
+    
     function toggleFollow(btn) {
       const following = btn.textContent === 'Seguindo';
       btn.textContent = following ? 'Seguir' : 'Seguindo';
       btn.classList.toggle('following', !following);
     }
 
-    // ── COMMENT INPUT ─────────────────────────────────────────
+    
     document.querySelectorAll('.comment-input').forEach(input => {
       const postBtn = input.nextElementSibling;
       input.addEventListener('input', () => {
